@@ -16,3 +16,6 @@ def test_select_1():
                                                    ['Bob',  'blue'],
                                                    ['Mary', 'brown'],
                                                    ['Vij',  'green']]
+def test_row2dict():
+    hmap = header_map(table[0])
+    assert row2dict(hmap, table[1]) == {'name': 'Bob', 'age': '5', 'eye colour': 'blue'}
