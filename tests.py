@@ -19,3 +19,16 @@ def test_select_1():
 def test_row2dict():
     hmap = header_map(table[0])
     assert row2dict(hmap, table[1]) == {'name': 'Bob', 'age': '5', 'eye colour': 'blue'}
+
+def test_check_row():
+    row = {'name': 'Bob', 'age': '5', 'eye colour': 'blue'}
+    assert check_row(row, ('age', '==', 5))
+    assert not check_row(row, ('eye colour', '==', 5))
+    assert check_row(row, ('eye colour', '==', 'blue'))
+    assert check_row(row, ('age', '>=', 4))
+    assert check_row(row, ('age', '<=', 1000))
+
+def test_check_row_logical():
+    row = {'name': 'Bob', 'age': '5', 'eye colour': 'blue'}
+    assert check_row(row, (('age', '==', 5),'OR',('eye colour', '==', 5)))
+    assert not check_row(row, (('age', '==', 5),'AND',('eye colour', '==', 5)))

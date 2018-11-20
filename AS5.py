@@ -40,9 +40,40 @@ def row2dict(hmap, row):
         i+=1
     return dict
 
-
+def check_row(row,op):
+    left = op[0]
+    operation = op[1]
+    right = op[2]
+    if(operation == 'OR'):
+        return check_row(row,left) or check_row(row,right)
+    elif(operation == 'AND'):
+        return check_row(row,left) and check_row(row,right)
+    #print(left)
+    #print(operation)
+    #print(right)
+    value = row[left]
+    if(type(right) is int):
+        try:
+            value = int(value)
+        except ValueError:
+            return False
+    if(operation == '=='):
+        if(value == right):
+            return True
+        return False
+    elif(operation == '<='):
+        if(value <= right):
+            return True
+        return False
+    elif(operation == '>='):
+        if(value >= right):
+            return True
+        return False
 if __name__ == "__main__":
     table = read_csv('test1.csv')
     #hmap = header_map(table[0])    
     #print(row2dict(hmap,table[1]))
     print(select(table,{'name','eye colour'}))
+    row = {'name': 'Bob', 'age': '5', 'eye colour': 'blue'}
+    print(check_row(row, ('age', '==', 5)))
+    print(type(('age', '==', 5)))
