@@ -22,7 +22,7 @@ def select(table,fields):
     num_table =[]
     for field in fields:
         num_table.append(hmap[field])
-        print(num_table)
+        #print(num_table)
     for row in table:
         cool_table =[]
         for i in num_table:
